@@ -24,23 +24,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 public class Client {
 
-  @Id
-  @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
-  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-  @GeneratedValue(generator = "uuid")
-  private UUID id;
+    @Id
+    @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    private UUID id;
 
-  @Column(nullable = false)
-  private String name;
+    @Column(nullable = false)
+    private String name;
 
-  @OneToMany(mappedBy = "cliet", fetch = FetchType.LAZY)
-  private Set<Flow> clietFlows;
+    @OneToMany(mappedBy = "cliet", fetch = FetchType.LAZY)
+    private Set<Flow> clietFlows;
 
-  @CreatedDate
-  @Column(nullable = false, updatable = false)
-  private OffsetDateTime dateCreated;
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private OffsetDateTime dateCreated;
 
-  @LastModifiedDate
-  @Column(nullable = false)
-  private OffsetDateTime lastUpdated;
+    @LastModifiedDate
+    @Column(nullable = false)
+    private OffsetDateTime lastUpdated;
 }

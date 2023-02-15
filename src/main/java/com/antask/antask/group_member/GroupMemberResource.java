@@ -19,41 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/groupMembers", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GroupMemberResource {
 
-  private final GroupMemberService groupMemberService;
+    private final GroupMemberService groupMemberService;
 
-  public GroupMemberResource(final GroupMemberService groupMemberService) {
-    this.groupMemberService = groupMemberService;
-  }
+    public GroupMemberResource(final GroupMemberService groupMemberService) {
+        this.groupMemberService = groupMemberService;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<GroupMemberDTO>> getAllGroupMembers() {
-    return ResponseEntity.ok(groupMemberService.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<GroupMemberDTO>> getAllGroupMembers() {
+        return ResponseEntity.ok(groupMemberService.findAll());
+    }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final Long id) {
-    return ResponseEntity.ok(groupMemberService.get(id));
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final Long id) {
+        return ResponseEntity.ok(groupMemberService.get(id));
+    }
 
-  @PostMapping
-  @ApiResponse(responseCode = "201")
-  public ResponseEntity<Long> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
-    return new ResponseEntity<>(groupMemberService.create(groupMemberDTO), HttpStatus.CREATED);
-  }
+    @PostMapping
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<Long> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
+        return new ResponseEntity<>(groupMemberService.create(groupMemberDTO), HttpStatus.CREATED);
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Void> updateGroupMember(
-    @PathVariable final Long id,
-    @RequestBody @Valid final GroupMemberDTO groupMemberDTO
-  ) {
-    groupMemberService.update(id, groupMemberDTO);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateGroupMember(
+        @PathVariable final Long id,
+        @RequestBody @Valid final GroupMemberDTO groupMemberDTO
+    ) {
+        groupMemberService.update(id, groupMemberDTO);
+        return ResponseEntity.ok().build();
+    }
 
-  @DeleteMapping("/{id}")
-  @ApiResponse(responseCode = "204")
-  public ResponseEntity<Void> deleteGroupMember(@PathVariable final Long id) {
-    groupMemberService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    @ApiResponse(responseCode = "204")
+    public ResponseEntity<Void> deleteGroupMember(@PathVariable final Long id) {
+        groupMemberService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

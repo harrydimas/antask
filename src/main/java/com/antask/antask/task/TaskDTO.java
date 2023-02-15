@@ -10,18 +10,18 @@ import lombok.Setter;
 @Setter
 public class TaskDTO {
 
-  private UUID id;
+    private UUID id;
 
-  @NotNull
-  @Size(max = 255)
-  private String assignee;
+    @NotNull
+    @Size(max = 255)
+    private String assignee;
 
-  @NotNull
-  private String variables;
+    @NotNull
+    private String variables;
 
-  @NotNull
-  private StatusTypeEnum status;
+    @NotNull
+    private StatusTypeEnum status;
 
-  @NotNull
-  private UUID node;
+    @NotNull
+    private UUID node;
 }

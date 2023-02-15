@@ -20,38 +20,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskResource {
 
-  private final TaskService taskService;
+    private final TaskService taskService;
 
-  public TaskResource(final TaskService taskService) {
-    this.taskService = taskService;
-  }
+    public TaskResource(final TaskService taskService) {
+        this.taskService = taskService;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<TaskDTO>> getAllTasks() {
-    return ResponseEntity.ok(taskService.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<TaskDTO>> getAllTasks() {
+        return ResponseEntity.ok(taskService.findAll());
+    }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<TaskDTO> getTask(@PathVariable final UUID id) {
-    return ResponseEntity.ok(taskService.get(id));
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskDTO> getTask(@PathVariable final UUID id) {
+        return ResponseEntity.ok(taskService.get(id));
+    }
 
-  @PostMapping
-  @ApiResponse(responseCode = "201")
-  public ResponseEntity<UUID> createTask(@RequestBody @Valid final TaskDTO taskDTO) {
-    return new ResponseEntity<>(taskService.create(taskDTO), HttpStatus.CREATED);
-  }
+    @PostMapping
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createTask(@RequestBody @Valid final TaskDTO taskDTO) {
+        return new ResponseEntity<>(taskService.create(taskDTO), HttpStatus.CREATED);
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Void> updateTask(@PathVariable final UUID id, @RequestBody @Valid final TaskDTO taskDTO) {
-    taskService.update(id, taskDTO);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateTask(@PathVariable final UUID id, @RequestBody @Valid final TaskDTO taskDTO) {
+        taskService.update(id, taskDTO);
+        return ResponseEntity.ok().build();
+    }
 
-  @DeleteMapping("/{id}")
-  @ApiResponse(responseCode = "204")
-  public ResponseEntity<Void> deleteTask(@PathVariable final UUID id) {
-    taskService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    @ApiResponse(responseCode = "204")
+    public ResponseEntity<Void> deleteTask(@PathVariable final UUID id) {
+        taskService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

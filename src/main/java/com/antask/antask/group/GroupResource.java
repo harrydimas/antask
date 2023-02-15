@@ -20,38 +20,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/groups", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GroupResource {
 
-  private final GroupService groupService;
+    private final GroupService groupService;
 
-  public GroupResource(final GroupService groupService) {
-    this.groupService = groupService;
-  }
+    public GroupResource(final GroupService groupService) {
+        this.groupService = groupService;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<GroupDTO>> getAllGroups() {
-    return ResponseEntity.ok(groupService.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<GroupDTO>> getAllGroups() {
+        return ResponseEntity.ok(groupService.findAll());
+    }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<GroupDTO> getGroup(@PathVariable final UUID id) {
-    return ResponseEntity.ok(groupService.get(id));
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<GroupDTO> getGroup(@PathVariable final UUID id) {
+        return ResponseEntity.ok(groupService.get(id));
+    }
 
-  @PostMapping
-  @ApiResponse(responseCode = "201")
-  public ResponseEntity<UUID> createGroup(@RequestBody @Valid final GroupDTO groupDTO) {
-    return new ResponseEntity<>(groupService.create(groupDTO), HttpStatus.CREATED);
-  }
+    @PostMapping
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createGroup(@RequestBody @Valid final GroupDTO groupDTO) {
+        return new ResponseEntity<>(groupService.create(groupDTO), HttpStatus.CREATED);
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Void> updateGroup(@PathVariable final UUID id, @RequestBody @Valid final GroupDTO groupDTO) {
-    groupService.update(id, groupDTO);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateGroup(@PathVariable final UUID id, @RequestBody @Valid final GroupDTO groupDTO) {
+        groupService.update(id, groupDTO);
+        return ResponseEntity.ok().build();
+    }
 
-  @DeleteMapping("/{id}")
-  @ApiResponse(responseCode = "204")
-  public ResponseEntity<Void> deleteGroup(@PathVariable final UUID id) {
-    groupService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    @ApiResponse(responseCode = "204")
+    public ResponseEntity<Void> deleteGroup(@PathVariable final UUID id) {
+        groupService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

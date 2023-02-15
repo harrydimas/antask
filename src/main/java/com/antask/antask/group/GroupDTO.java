@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 public class GroupDTO {
 
-  private UUID id;
+    private UUID id;
 
-  @NotNull
-  @Size(max = 255)
-  private String name;
+    @NotNull
+    @Size(max = 255)
+    private String name;
 }

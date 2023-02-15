@@ -20,38 +20,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/flows", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FlowResource {
 
-  private final FlowService flowService;
+    private final FlowService flowService;
 
-  public FlowResource(final FlowService flowService) {
-    this.flowService = flowService;
-  }
+    public FlowResource(final FlowService flowService) {
+        this.flowService = flowService;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<FlowDTO>> getAllFlows() {
-    return ResponseEntity.ok(flowService.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<FlowDTO>> getAllFlows() {
+        return ResponseEntity.ok(flowService.findAll());
+    }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<FlowDTO> getFlow(@PathVariable final UUID id) {
-    return ResponseEntity.ok(flowService.get(id));
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<FlowDTO> getFlow(@PathVariable final UUID id) {
+        return ResponseEntity.ok(flowService.get(id));
+    }
 
-  @PostMapping
-  @ApiResponse(responseCode = "201")
-  public ResponseEntity<UUID> createFlow(@RequestBody @Valid final FlowDTO flowDTO) {
-    return new ResponseEntity<>(flowService.create(flowDTO), HttpStatus.CREATED);
-  }
+    @PostMapping
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createFlow(@RequestBody @Valid final FlowDTO flowDTO) {
+        return new ResponseEntity<>(flowService.create(flowDTO), HttpStatus.CREATED);
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Void> updateFlow(@PathVariable final UUID id, @RequestBody @Valid final FlowDTO flowDTO) {
-    flowService.update(id, flowDTO);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateFlow(@PathVariable final UUID id, @RequestBody @Valid final FlowDTO flowDTO) {
+        flowService.update(id, flowDTO);
+        return ResponseEntity.ok().build();
+    }
 
-  @DeleteMapping("/{id}")
-  @ApiResponse(responseCode = "204")
-  public ResponseEntity<Void> deleteFlow(@PathVariable final UUID id) {
-    flowService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    @ApiResponse(responseCode = "204")
+    public ResponseEntity<Void> deleteFlow(@PathVariable final UUID id) {
+        flowService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

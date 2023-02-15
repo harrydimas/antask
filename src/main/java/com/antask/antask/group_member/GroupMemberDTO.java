@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 public class GroupMemberDTO {
 
-  private Long id;
+    private Long id;
 
-  @NotNull
-  @Size(max = 255)
-  private String email;
+    @NotNull
+    @Size(max = 255)
+    private String email;
 
-  @NotNull
-  private UUID group;
+    @NotNull
+    private UUID group;
 }

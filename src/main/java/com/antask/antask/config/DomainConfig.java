@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
 public class DomainConfig {
 
-  @Bean(name = "auditingDateTimeProvider")
-  public DateTimeProvider dateTimeProvider() {
-    return () -> Optional.of(OffsetDateTime.now());
-  }
+    @Bean(name = "auditingDateTimeProvider")
+    public DateTimeProvider dateTimeProvider() {
+        return () -> Optional.of(OffsetDateTime.now());
+    }
 }

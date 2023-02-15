@@ -26,31 +26,31 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 public class Task {
 
-  @Id
-  @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
-  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-  @GeneratedValue(generator = "uuid")
-  private UUID id;
+    @Id
+    @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    private UUID id;
 
-  @Column(nullable = false)
-  private String assignee;
+    @Column(nullable = false)
+    private String assignee;
 
-  @Column(nullable = false, columnDefinition = "longtext")
-  private String variables;
+    @Column(nullable = false, columnDefinition = "longtext")
+    private String variables;
 
-  @Column(nullable = false)
-  @Enumerated(EnumType.STRING)
-  private StatusTypeEnum status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private StatusTypeEnum status;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "node_id", nullable = false)
-  private Node node;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_id", nullable = false)
+    private Node node;
 
-  @CreatedDate
-  @Column(nullable = false, updatable = false)
-  private OffsetDateTime dateCreated;
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private OffsetDateTime dateCreated;
 
-  @LastModifiedDate
-  @Column(nullable = false)
-  private OffsetDateTime lastUpdated;
+    @LastModifiedDate
+    @Column(nullable = false)
+    private OffsetDateTime lastUpdated;
 }

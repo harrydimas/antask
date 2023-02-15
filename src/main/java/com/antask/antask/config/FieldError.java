@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class FieldError {
 
-  private String field;
-  private String errorCode;
+    private String field;
+    private String errorCode;
 }

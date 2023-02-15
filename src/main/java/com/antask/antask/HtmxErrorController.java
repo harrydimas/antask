@@ -17,15 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HtmxErrorController {
 
-  private final BasicErrorController basicErrorController;
+    private final BasicErrorController basicErrorController;
 
-  public HtmxErrorController(final BasicErrorController basicErrorController) {
-    this.basicErrorController = basicErrorController;
-  }
+    public HtmxErrorController(final BasicErrorController basicErrorController) {
+        this.basicErrorController = basicErrorController;
+    }
 
-  @RequestMapping(value = "${server.error.path:${error.path:/error}}", headers = "HX-Request=true")
-  @ResponseStatus(HttpStatus.OK)
-  public ModelAndView errorHtmx(final HttpServletRequest request, final HttpServletResponse response) {
-    return basicErrorController.errorHtml(request, response);
-  }
+    @RequestMapping(value = "${server.error.path:${error.path:/error}}", headers = "HX-Request=true")
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView errorHtmx(final HttpServletRequest request, final HttpServletResponse response) {
+        return basicErrorController.errorHtml(request, response);
+    }
 }

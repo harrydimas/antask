@@ -20,38 +20,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/clients", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientResource {
 
-  private final ClientService clientService;
+    private final ClientService clientService;
 
-  public ClientResource(final ClientService clientService) {
-    this.clientService = clientService;
-  }
+    public ClientResource(final ClientService clientService) {
+        this.clientService = clientService;
+    }
 
-  @GetMapping
-  public ResponseEntity<List<ClientDTO>> getAllClients() {
-    return ResponseEntity.ok(clientService.findAll());
-  }
+    @GetMapping
+    public ResponseEntity<List<ClientDTO>> getAllClients() {
+        return ResponseEntity.ok(clientService.findAll());
+    }
 
-  @GetMapping("/{id}")
-  public ResponseEntity<ClientDTO> getClient(@PathVariable final UUID id) {
-    return ResponseEntity.ok(clientService.get(id));
-  }
+    @GetMapping("/{id}")
+    public ResponseEntity<ClientDTO> getClient(@PathVariable final UUID id) {
+        return ResponseEntity.ok(clientService.get(id));
+    }
 
-  @PostMapping
-  @ApiResponse(responseCode = "201")
-  public ResponseEntity<UUID> createClient(@RequestBody @Valid final ClientDTO clientDTO) {
-    return new ResponseEntity<>(clientService.create(clientDTO), HttpStatus.CREATED);
-  }
+    @PostMapping
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createClient(@RequestBody @Valid final ClientDTO clientDTO) {
+        return new ResponseEntity<>(clientService.create(clientDTO), HttpStatus.CREATED);
+    }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Void> updateClient(@PathVariable final UUID id, @RequestBody @Valid final ClientDTO clientDTO) {
-    clientService.update(id, clientDTO);
-    return ResponseEntity.ok().build();
-  }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateClient(
+        @PathVariable final UUID id,
+        @RequestBody @Valid final ClientDTO clientDTO
+    ) {
+        clientService.update(id, clientDTO);
+        return ResponseEntity.ok().build();
+    }
 
-  @DeleteMapping("/{id}")
-  @ApiResponse(responseCode = "204")
-  public ResponseEntity<Void> deleteClient(@PathVariable final UUID id) {
-    clientService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @DeleteMapping("/{id}")
+    @ApiResponse(responseCode = "204")
+    public ResponseEntity<Void> deleteClient(@PathVariable final UUID id) {
+        clientService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

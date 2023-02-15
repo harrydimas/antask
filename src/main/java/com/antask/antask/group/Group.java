@@ -26,23 +26,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 public class Group {
 
-  @Id
-  @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
-  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-  @GeneratedValue(generator = "uuid")
-  private UUID id;
+    @Id
+    @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(generator = "uuid")
+    private UUID id;
 
-  @Column(nullable = false)
-  private String name;
+    @Column(nullable = false)
+    private String name;
 
-  @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
-  private Set<GroupMember> groupGroupMembers;
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
+    private Set<GroupMember> groupGroupMembers;
 
-  @CreatedDate
-  @Column(nullable = false, updatable = false)
-  private OffsetDateTime dateCreated;
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private OffsetDateTime dateCreated;
 
-  @LastModifiedDate
-  @Column(nullable = false)
-  private OffsetDateTime lastUpdated;
+    @LastModifiedDate
+    @Column(nullable = false)
+    private OffsetDateTime lastUpdated;
 }
