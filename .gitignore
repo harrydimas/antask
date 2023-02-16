@@ -6,7 +6,6 @@ target/
 application-local.yml
 *.log
 node_modules/
-node/
 
 ### STS ###
 .apt_generated
