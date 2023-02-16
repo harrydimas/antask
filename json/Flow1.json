@@ -1,0 +1,26 @@
+{
+  "flow" : {
+    "name" : "Flow 1",
+    "client" : "5076ea8a-76b9-495a-90ec-06de2890eae5"
+  },
+  "nodes" : [
+    {
+      "name" : "Start",
+      "nodeType" : "START",
+      "assigneeType" : "START",
+      "approvedNode" : "Node_1"
+    },
+    {
+      "name" : "Node_1",
+      "nodeType" : "TASK",
+      "assigneeType" : "EMAIL",
+      "assignee" : "dimas.antask1@getnada.com",
+      "approvedNode" : "End"
+    },
+    {
+      "name" : "End",
+      "nodeType" : "END",
+      "assigneeType" : "END"
+    }
+  ]
+}

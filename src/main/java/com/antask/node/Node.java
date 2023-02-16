@@ -50,10 +50,10 @@ public class Node {
     private String assignee;
 
     @Column(columnDefinition = "char(36)")
-    private UUID approvedNode;
+    private String approvedNode;
 
     @Column(columnDefinition = "char(36)")
-    private UUID rejectedNode;
+    private String rejectedNode;
 
     @OneToMany(mappedBy = "node", fetch = FetchType.LAZY)
     private Set<Task> nodeTasks;

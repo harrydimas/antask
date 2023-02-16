@@ -40,8 +40,8 @@ public class Flow {
     private Set<Node> flowNodes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliet_id", nullable = false)
-    private Client cliet;
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

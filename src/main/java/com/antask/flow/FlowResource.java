@@ -42,6 +42,12 @@ public class FlowResource {
         return new ResponseEntity<>(flowService.create(flowDTO), HttpStatus.CREATED);
     }
 
+    @PostMapping("/bulk")
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createFlowBulk(@RequestBody @Valid final FlowNodeDTO flowNodeDTO) {
+        return new ResponseEntity<>(flowService.createBulk(flowNodeDTO), HttpStatus.CREATED);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateFlow(@PathVariable final UUID id, @RequestBody @Valid final FlowDTO flowDTO) {
         flowService.update(id, flowDTO);

@@ -25,9 +25,9 @@ public class NodeDTO {
     @Size(max = 255)
     private String assignee;
 
-    private UUID approvedNode;
+    private String approvedNode;
 
-    private UUID rejectedNode;
+    private String rejectedNode;
 
     @NotNull
     private UUID flow;

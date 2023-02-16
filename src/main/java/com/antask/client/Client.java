@@ -33,8 +33,8 @@ public class Client {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "cliet", fetch = FetchType.LAZY)
-    private Set<Flow> clietFlows;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Flow> clientFlows;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

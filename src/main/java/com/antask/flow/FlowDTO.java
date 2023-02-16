@@ -17,5 +17,5 @@ public class FlowDTO {
     private String name;
 
     @NotNull
-    private UUID cliet;
+    private UUID client;
 }
