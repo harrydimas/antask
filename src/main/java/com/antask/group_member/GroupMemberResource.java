@@ -3,6 +3,8 @@ package com.antask.group_member;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,19 +33,19 @@ public class GroupMemberResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final Long id) {
+    public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final UUID id) {
         return ResponseEntity.ok(groupMemberService.get(id));
     }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
+    public ResponseEntity<UUID> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
         return new ResponseEntity<>(groupMemberService.create(groupMemberDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateGroupMember(
-        @PathVariable final Long id,
+        @PathVariable final UUID id,
         @RequestBody @Valid final GroupMemberDTO groupMemberDTO
     ) {
         groupMemberService.update(id, groupMemberDTO);
@@ -52,7 +54,7 @@ public class GroupMemberResource {
 
     @DeleteMapping("/{id}")
     @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteGroupMember(@PathVariable final Long id) {
+    public ResponseEntity<Void> deleteGroupMember(@PathVariable final UUID id) {
         groupMemberService.delete(id);
         return ResponseEntity.noContent().build();
     }

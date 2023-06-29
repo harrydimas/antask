@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class GroupMemberDTO {
 
-    private Long id;
+    private UUID id;
 
     @NotNull
     @Size(max = 255)

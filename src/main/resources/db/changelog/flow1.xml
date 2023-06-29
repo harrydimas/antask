@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create_client" author="ANTASK">
+        <insert tableName="client">
+            <column name="id" valueComputed="uuid()" />
+            <column name="name" value="Client 1" />
+            <column name="date_created" valueComputed="now()" />
+            <column name="last_updated" valueComputed="now()" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_flow" author="ANTASK">
+        <insert tableName="flow">
+            <column name="id" valueComputed="uuid()" />
+            <column name="name" value="Flow 1" />
+            <column name="client_id" valueComputed="(select id from client where name='Client 1')" />
+            <column name="date_created" valueComputed="now()" />
+            <column name="last_updated" valueComputed="now()" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
