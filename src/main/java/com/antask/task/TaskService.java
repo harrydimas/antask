@@ -1,9 +1,13 @@
 package com.antask.task;
 
+import com.antask.flow.Flow;
+import com.antask.flow.FlowRepository;
+import com.antask.node.AssigneeTypeEnum;
 import com.antask.node.Node;
 import com.antask.node.NodeRepository;
 import com.antask.util.NotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +20,7 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final NodeRepository nodeRepository;
+    private final FlowRepository flowRepository;
 
     public List<TaskDTO> findAll() {
         final List<Task> tasks = taskRepository.findAll(Sort.by("id"));
@@ -35,8 +40,22 @@ public class TaskService {
         return taskRepository.save(task).getId();
     }
 
+    public UUID submitNew(final TaskResource.TaskSubmission taskSubmission) {
+        final Task task = new Task();
+        task.setVariables(taskSubmission.jsonVariables());
+        task.setStatus(StatusTypeEnum.NEW);
+        Flow flow = flowRepository.findByName(taskSubmission.flowName()).orElseThrow(() -> new NotFoundException("flow not found"));
+        var nodeId = nodeRepository.findStartByFlow(flow.getId());
+        var node = nodeRepository.findById(UUID.fromString(nodeId)).orElseThrow(() -> new NotFoundException("node not found"));
+        task.setNode(node);
+        if(node.getAssigneeType() == AssigneeTypeEnum.EMAIL)
+            task.setAssignee(node.getAssignee());
+        else throw new IllegalArgumentException();
+        return taskRepository.save(task).getId();
+    }
+
     public void update(final UUID id, final TaskDTO taskDTO) {
-        final Task task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException());
+        final Task task = taskRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(taskDTO, task);
         taskRepository.save(task);
     }

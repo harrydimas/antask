@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +55,13 @@ public class TaskResource {
     public ResponseEntity<Void> deleteTask(@PathVariable final UUID id) {
         taskService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    record TaskSubmission(@NotNull String flowName, @NotNull String jsonVariables){}
+
+    @PostMapping("submit")
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<UUID> createTask(@RequestBody @Valid final TaskSubmission taskSubmission) {
+        return new ResponseEntity<>(taskService.submitNew(taskSubmission), HttpStatus.CREATED);
     }
 }

@@ -24,4 +24,6 @@ public class TaskDTO {
 
     @NotNull
     private UUID node;
+
+    private String flow;
 }

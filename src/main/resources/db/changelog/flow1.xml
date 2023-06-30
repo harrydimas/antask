@@ -20,10 +20,57 @@
         <insert tableName="flow">
             <column name="id" valueComputed="uuid()" />
             <column name="name" value="Flow 1" />
-            <column name="client_id" valueComputed="(select id from client where name='Client 1')" />
+            <column name="client_id" valueComputed="(SELECT id FROM client WHERE name='Client 1')" />
             <column name="date_created" valueComputed="now()" />
             <column name="last_updated" valueComputed="now()" />
         </insert>
+    </changeSet>
+
+    <changeSet id="create_node_end" author="ANTASK">
+        <insert tableName="node">
+            <column name="id" valueComputed="uuid()" />
+            <column name="name" value="End" />
+            <column name="node_type" value="END" />
+            <column name="assignee_type" value="END" />
+            <column name="flow_id" valueComputed="(SELECT id FROM flow WHERE name='Flow 1')" />
+            <column name="date_created" valueComputed="now()" />
+            <column name="last_updated" valueComputed="now()" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_node_1" author="ANTASK">
+        <insert tableName="node">
+            <column name="id" valueComputed="uuid()" />
+            <column name="name" value="Node_1" />
+            <column name="node_type" value="TASK" />
+            <column name="assignee_type" value="EMAIL" />
+            <column name="assignee" value="dimas.antask1@getnada.com" />
+            <column name="flow_id" valueComputed="(SELECT id FROM flow WHERE name='Flow 1')" />
+            <column name="date_created" valueComputed="now()" />
+            <column name="last_updated" valueComputed="now()" />
+        </insert>
+
+        <update tableName="node">
+            <column name="approved_node" valueComputed="(SELECT id FROM node WHERE name='End')" />
+            <where>name = 'Node_1'</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="create_node_start" author="ANTASK">
+        <insert tableName="node">
+            <column name="id" valueComputed="uuid()" />
+            <column name="name" value="Start" />
+            <column name="node_type" value="START" />
+            <column name="assignee_type" value="START" />
+            <column name="flow_id" valueComputed="(SELECT id FROM flow WHERE name='Flow 1')" />
+            <column name="date_created" valueComputed="now()" />
+            <column name="last_updated" valueComputed="now()" />
+        </insert>
+
+        <update tableName="node">
+            <column name="approved_node" valueComputed="(SELECT id FROM node WHERE name='Node_1')" />
+            <where>name = 'Start'</where>
+        </update>
     </changeSet>
 
 </databaseChangeLog>
