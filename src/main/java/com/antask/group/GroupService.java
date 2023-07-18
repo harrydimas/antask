@@ -23,7 +23,7 @@ public class GroupService {
         return groupRepository
             .findById(id)
             .map(group -> mapToDTO(group, new GroupDTO()))
-            .orElseThrow(() -> new NotFoundException());
+            .orElseThrow(NotFoundException::new);
     }
 
     public String create(final GroupDTO groupDTO) {
@@ -33,7 +33,7 @@ public class GroupService {
     }
 
     public void update(final String id, final GroupDTO groupDTO) {
-        final Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException());
+        final Group group = groupRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(groupDTO, group);
         groupRepository.save(group);
     }

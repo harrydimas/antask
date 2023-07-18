@@ -31,7 +31,7 @@ public class NodeService {
         return nodeRepository
             .findById(id)
             .map(node -> mapToDTO(node, new NodeDTO()))
-            .orElseThrow(() -> new NotFoundException());
+            .orElseThrow(NotFoundException::new);
     }
 
     public String create(final NodeDTO nodeDTO) {
@@ -41,7 +41,7 @@ public class NodeService {
     }
 
     public void update(final String id, final NodeDTO nodeDTO) {
-        final Node node = nodeRepository.findById(id).orElseThrow(() -> new NotFoundException());
+        final Node node = nodeRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(nodeDTO, node);
         nodeRepository.save(node);
     }
@@ -101,7 +101,7 @@ public class NodeService {
             var existingGroup = groupRepositoryImpl.findByNameAndFlow(nodeDTO.getAssignee(), nodeDTO.getFlow());
             if (Objects.isNull(existingGroup))
                 throw new NotFoundException("group " + nodeDTO.getAssignee() + " not found");
-            node.setAssignee(existingGroup.getId().toString());
+            node.setAssignee(existingGroup.getId());
         } else {
             node.setAssignee(nodeDTO.getAssignee());
         }
@@ -110,7 +110,7 @@ public class NodeService {
             var existingNode = nodeRepository.findByNameAndFlow(nodeDTO.getApprovedNode(), nodeDTO.getFlow());
             if (Objects.isNull(existingNode))
                 throw new NotFoundException("approved node " + nodeDTO.getApprovedNode() + " not found");
-            node.setApprovedNode(existingNode.getId().toString());
+            node.setApprovedNode(existingNode.getId());
         } else {
             node.setApprovedNode(null);
         }
@@ -119,7 +119,7 @@ public class NodeService {
             var existingNode = nodeRepository.findByNameAndFlow(nodeDTO.getRejectedNode(), nodeDTO.getFlow());
             if (Objects.isNull(existingNode))
                 throw new NotFoundException("rejected node " + nodeDTO.getRejectedNode() + " not found");
-            node.setRejectedNode(existingNode.getId().toString());
+            node.setRejectedNode(existingNode.getId());
         } else {
             node.setRejectedNode(null);
         }
