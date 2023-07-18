@@ -2,8 +2,6 @@ package com.antask.client;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
-import java.util.List;
-import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/clients", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,19 +32,19 @@ public class ClientResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClientDTO> getClient(@PathVariable final UUID id) {
+    public ResponseEntity<ClientDTO> getClient(@PathVariable final String id) {
         return ResponseEntity.ok(clientService.get(id));
     }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<UUID> createClient(@RequestBody @Valid final ClientDTO clientDTO) {
+    public ResponseEntity<String> createClient(@RequestBody @Valid final ClientDTO clientDTO) {
         return new ResponseEntity<>(clientService.create(clientDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateClient(
-        @PathVariable final UUID id,
+        @PathVariable final String id,
         @RequestBody @Valid final ClientDTO clientDTO
     ) {
         clientService.update(id, clientDTO);
@@ -53,7 +53,7 @@ public class ClientResource {
 
     @DeleteMapping("/{id}")
     @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteClient(@PathVariable final UUID id) {
+    public ResponseEntity<Void> deleteClient(@PathVariable final String id) {
         clientService.delete(id);
         return ResponseEntity.noContent().build();
     }

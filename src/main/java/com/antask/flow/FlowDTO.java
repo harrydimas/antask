@@ -2,7 +2,6 @@ package com.antask.flow;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +9,12 @@ import lombok.Setter;
 @Setter
 public class FlowDTO {
 
-    private UUID id;
+    private String id;
 
     @NotNull
     @Size(max = 255)
     private String name;
 
     @NotNull
-    private UUID client;
+    private String client;
 }

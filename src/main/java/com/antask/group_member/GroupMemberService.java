@@ -3,12 +3,12 @@ package com.antask.group_member;
 import com.antask.group.Group;
 import com.antask.group.GroupRepository;
 import com.antask.util.NotFoundException;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,26 +25,26 @@ public class GroupMemberService {
             .collect(Collectors.toList());
     }
 
-    public GroupMemberDTO get(final UUID id) {
+    public GroupMemberDTO get(final String id) {
         return groupMemberRepository
             .findById(id)
             .map(groupMember -> mapToDTO(groupMember, new GroupMemberDTO()))
             .orElseThrow(NotFoundException::new);
     }
 
-    public UUID create(final GroupMemberDTO groupMemberDTO) {
+    public String create(final GroupMemberDTO groupMemberDTO) {
         final GroupMember groupMember = new GroupMember();
         mapToEntity(groupMemberDTO, groupMember);
         return groupMemberRepository.save(groupMember).getId();
     }
 
-    public void update(final UUID id, final GroupMemberDTO groupMemberDTO) {
+    public void update(final String id, final GroupMemberDTO groupMemberDTO) {
         final GroupMember groupMember = groupMemberRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(groupMemberDTO, groupMember);
         groupMemberRepository.save(groupMember);
     }
 
-    public void delete(final UUID id) {
+    public void delete(final String id) {
         groupMemberRepository.deleteById(id);
     }
 

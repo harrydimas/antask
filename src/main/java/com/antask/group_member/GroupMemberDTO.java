@@ -2,7 +2,6 @@ package com.antask.group_member;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +9,12 @@ import lombok.Setter;
 @Setter
 public class GroupMemberDTO {
 
-    private UUID id;
+    private String id;
 
     @NotNull
     @Size(max = 255)
     private String email;
 
     @NotNull
-    private UUID group;
+    private String group;
 }

@@ -1,12 +1,12 @@
 package com.antask.group;
 
 import com.antask.util.NotFoundException;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,26 +19,26 @@ public class GroupService {
         return groups.stream().map(group -> mapToDTO(group, new GroupDTO())).collect(Collectors.toList());
     }
 
-    public GroupDTO get(final UUID id) {
+    public GroupDTO get(final String id) {
         return groupRepository
             .findById(id)
             .map(group -> mapToDTO(group, new GroupDTO()))
             .orElseThrow(() -> new NotFoundException());
     }
 
-    public UUID create(final GroupDTO groupDTO) {
+    public String create(final GroupDTO groupDTO) {
         final Group group = new Group();
         mapToEntity(groupDTO, group);
         return groupRepository.save(group).getId();
     }
 
-    public void update(final UUID id, final GroupDTO groupDTO) {
+    public void update(final String id, final GroupDTO groupDTO) {
         final Group group = groupRepository.findById(id).orElseThrow(() -> new NotFoundException());
         mapToEntity(groupDTO, group);
         groupRepository.save(group);
     }
 
-    public void delete(final UUID id) {
+    public void delete(final String id) {
         groupRepository.deleteById(id);
     }
 

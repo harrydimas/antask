@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class ClientDTO {
 
-    private UUID id;
+    private String id;
 
     @NotNull
     @Size(max = 255)

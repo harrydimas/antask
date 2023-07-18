@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="#{task.index.headline}"/>
+    <script th:src="@{/js/task.js}" defer></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <table class="table" id="task">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Assignee</th>
+            <th scope="col">Node</th>
+            <th scope="col">Flow</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -2,17 +2,15 @@ package com.antask.flow;
 
 import com.antask.client.Client;
 import com.antask.client.ClientRepository;
-import com.antask.node.Node;
-import com.antask.node.NodeDTO;
 import com.antask.node.NodeService;
 import com.antask.util.NotFoundException;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,24 +25,24 @@ public class FlowService {
         return flows.stream().map(flow -> mapToDTO(flow, new FlowDTO())).collect(Collectors.toList());
     }
 
-    public FlowDTO get(final UUID id) {
+    public FlowDTO get(final String id) {
         return flowRepository
             .findById(id)
             .map(flow -> mapToDTO(flow, new FlowDTO()))
-            .orElseThrow(() -> new NotFoundException());
+            .orElseThrow(NotFoundException::new);
     }
 
-    public UUID create(final FlowDTO flowDTO) {
+    public String create(final FlowDTO flowDTO) {
         final Flow flow = new Flow();
         mapToEntity(flowDTO, flow);
         return flowRepository.save(flow).getId();
     }
 
     @Transactional
-    public UUID createBulk(final FlowNodeDTO dto) {
+    public String createBulk(final FlowNodeDTO dto) {
         final Flow flow = new Flow();
         mapToEntity(dto.getFlow(), flow);
-        UUID flowId = flowRepository.save(flow).getId();
+        String flowId = flowRepository.save(flow).getId();
         for (int i = dto.getNodes().size() - 1; i > -1; i--) {
             var node = dto.getNodes().get(i);
             node.setFlow(flowId);
@@ -53,13 +51,13 @@ public class FlowService {
         return flowId;
     }
 
-    public void update(final UUID id, final FlowDTO flowDTO) {
-        final Flow flow = flowRepository.findById(id).orElseThrow(() -> new NotFoundException());
+    public void update(final String id, final FlowDTO flowDTO) {
+        final Flow flow = flowRepository.findById(id).orElseThrow(NotFoundException::new);
         mapToEntity(flowDTO, flow);
         flowRepository.save(flow);
     }
 
-    public void delete(final UUID id) {
+    public void delete(final String id) {
         flowRepository.deleteById(id);
     }
 

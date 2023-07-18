@@ -2,7 +2,6 @@ package com.antask.node;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class NodeDTO {
 
-    private UUID id;
+    private String id;
 
     @NotNull
     @Size(max = 255)
@@ -30,5 +29,5 @@ public class NodeDTO {
     private String rejectedNode;
 
     @NotNull
-    private UUID flow;
+    private String flow;
 }

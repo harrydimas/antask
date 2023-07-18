@@ -1,7 +1,6 @@
 package com.antask.group;
 
 import jakarta.persistence.EntityManager;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +10,12 @@ public class GroupRepositoryImpl {
 
     private final EntityManager entityManager;
 
-    public Group findByNameAndFlow(String name, UUID flowId) {
+    public Group findByNameAndFlow(String name, String flow) {
         String sql =
-            "SELECT model FROM Group model WHERE model.name = :name AND model.flow.id = :flowId ORDER BY model.dateCreated DESC";
+            "SELECT model FROM Group model WHERE model.name = :name AND (model.flow.id = :flow OR model.flow.name = :flow) ORDER BY model.dateCreated DESC";
         var list = entityManager.createQuery(sql)
                 .setParameter("name", name)
-                .setParameter("flowId", flowId)
+                .setParameter("flow", flow)
                 .getResultList();
         return list.isEmpty() ? null : (Group) list.get(0);
     }

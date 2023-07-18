@@ -6,13 +6,13 @@ import com.antask.group.GroupRepositoryImpl;
 import com.antask.util.BadRequestException;
 import com.antask.util.NotFoundException;
 import com.antask.util.StringUtils;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,26 +27,26 @@ public class NodeService {
         return nodes.stream().map(node -> mapToDTO(node, new NodeDTO())).collect(Collectors.toList());
     }
 
-    public NodeDTO get(final UUID id) {
+    public NodeDTO get(final String id) {
         return nodeRepository
             .findById(id)
             .map(node -> mapToDTO(node, new NodeDTO()))
             .orElseThrow(() -> new NotFoundException());
     }
 
-    public UUID create(final NodeDTO nodeDTO) {
+    public String create(final NodeDTO nodeDTO) {
         final Node node = new Node();
         mapToEntity(nodeDTO, node);
         return nodeRepository.save(node).getId();
     }
 
-    public void update(final UUID id, final NodeDTO nodeDTO) {
+    public void update(final String id, final NodeDTO nodeDTO) {
         final Node node = nodeRepository.findById(id).orElseThrow(() -> new NotFoundException());
         mapToEntity(nodeDTO, node);
         nodeRepository.save(node);
     }
 
-    public void delete(final UUID id) {
+    public void delete(final String id) {
         nodeRepository.deleteById(id);
     }
 

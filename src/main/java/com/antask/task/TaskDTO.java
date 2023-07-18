@@ -2,7 +2,6 @@ package com.antask.task;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class TaskDTO {
 
-    private UUID id;
+    private String id;
 
     @NotNull
     @Size(max = 255)
@@ -23,7 +22,7 @@ public class TaskDTO {
     private StatusTypeEnum status;
 
     @NotNull
-    private UUID node;
+    private String node;
 
     private String flow;
 }

@@ -2,9 +2,6 @@ package com.antask.group_member;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/groupMembers", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,19 +32,19 @@ public class GroupMemberResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final UUID id) {
+    public ResponseEntity<GroupMemberDTO> getGroupMember(@PathVariable final String id) {
         return ResponseEntity.ok(groupMemberService.get(id));
     }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<UUID> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
+    public ResponseEntity<String> createGroupMember(@RequestBody @Valid final GroupMemberDTO groupMemberDTO) {
         return new ResponseEntity<>(groupMemberService.create(groupMemberDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateGroupMember(
-        @PathVariable final UUID id,
+        @PathVariable final String id,
         @RequestBody @Valid final GroupMemberDTO groupMemberDTO
     ) {
         groupMemberService.update(id, groupMemberDTO);
@@ -54,7 +53,7 @@ public class GroupMemberResource {
 
     @DeleteMapping("/{id}")
     @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteGroupMember(@PathVariable final UUID id) {
+    public ResponseEntity<Void> deleteGroupMember(@PathVariable final String id) {
         groupMemberService.delete(id);
         return ResponseEntity.noContent().build();
     }
